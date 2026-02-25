@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/sipeed/picoclaw/pkg/config"
@@ -175,6 +176,9 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 	switch {
 	case strings.HasPrefix(model, "openrouter/") || strings.HasPrefix(model, "anthropic/") || strings.HasPrefix(model, "openai/") || strings.HasPrefix(model, "meta-llama/") || strings.HasPrefix(model, "deepseek/") || strings.HasPrefix(model, "google/"):
 		apiKey = cfg.Providers.OpenRouter.APIKey
+		if apiKey == "" {
+			apiKey = os.Getenv("OPENROUTER_API_KEY")
+		}
 		if cfg.Providers.OpenRouter.APIBase != "" {
 			apiBase = cfg.Providers.OpenRouter.APIBase
 		} else {
@@ -228,8 +232,11 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 			} else {
 				apiBase = "https://openrouter.ai/api/v1"
 			}
+		} else if envKey := os.Getenv("OPENROUTER_API_KEY"); envKey != "" {
+			apiKey = envKey
+			apiBase = "https://openrouter.ai/api/v1"
 		} else {
-			return nil, fmt.Errorf("no API key configured for model: %s", model)
+			return nil, fmt.Errorf("no API key configured for model: %s. Use OPENROUTER_API_KEY environment variable.", model)
 		}
 	}
 

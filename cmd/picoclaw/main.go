@@ -706,7 +706,18 @@ func statusCmd() {
 
 func getConfigPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".picoclaw", "config.json")
+	homePath := filepath.Join(home, ".picoclaw", "config.json")
+	if _, err := os.Stat(homePath); err == nil {
+		return homePath
+	}
+
+	// Fallback to local config directory
+	localPath := filepath.Join("config", "config.json")
+	if _, err := os.Stat(localPath); err == nil {
+		return localPath
+	}
+
+	return homePath
 }
 
 func loadConfig() (*config.Config, error) {
