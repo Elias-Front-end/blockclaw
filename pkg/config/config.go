@@ -12,7 +12,7 @@ import (
 type Config struct {
 	Agents    AgentsConfig    `json:"agents"`
 	Channels  ChannelsConfig  `json:"channels"`
-	Providers ProvidersConfig `json:"providers"`
+	Providers ProvidersConfig `json:"providers" envPrefix:""`
 	Gateway   GatewayConfig   `json:"gateway"`
 	Tools     ToolsConfig     `json:"tools"`
 	mu        sync.RWMutex

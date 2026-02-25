@@ -240,8 +240,12 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 		}
 	}
 
+	if apiKey == "" {
+		apiKey = os.Getenv("OPENROUTER_API_KEY")
+	}
+
 	if apiKey == "" && !strings.HasPrefix(model, "bedrock/") {
-		return nil, fmt.Errorf("no API key configured for provider (model: %s)", model)
+		return nil, fmt.Errorf("no API key configured for provider (model: %s). Please set OPENROUTER_API_KEY environment variable.", model)
 	}
 
 	if apiBase == "" {
