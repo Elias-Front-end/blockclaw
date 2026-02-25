@@ -73,18 +73,18 @@ type MaixCamConfig struct {
 }
 
 type ProvidersConfig struct {
-	Anthropic  ProviderConfig `json:"anthropic"`
-	OpenAI     ProviderConfig `json:"openai"`
-	OpenRouter ProviderConfig `json:"openrouter"`
-	Groq       ProviderConfig `json:"groq"`
-	Zhipu      ProviderConfig `json:"zhipu"`
-	VLLM       ProviderConfig `json:"vllm"`
-	Gemini     ProviderConfig `json:"gemini"`
+	Anthropic  ProviderConfig `json:"anthropic" envPrefix:"ANTHROPIC_"`
+	OpenAI     ProviderConfig `json:"openai" envPrefix:"OPENAI_"`
+	OpenRouter ProviderConfig `json:"openrouter" envPrefix:"OPENROUTER_"`
+	Groq       ProviderConfig `json:"groq" envPrefix:"GROQ_"`
+	Zhipu      ProviderConfig `json:"zhipu" envPrefix:"ZHIPU_"`
+	VLLM       ProviderConfig `json:"vllm" envPrefix:"VLLM_"`
+	Gemini     ProviderConfig `json:"gemini" envPrefix:"GEMINI_"`
 }
 
 type ProviderConfig struct {
-	APIKey  string `json:"api_key" env:"PICOCLAW_PROVIDERS_{{.Name}}_API_KEY"`
-	APIBase string `json:"api_base" env:"PICOCLAW_PROVIDERS_{{.Name}}_API_BASE"`
+	APIKey  string `json:"api_key" env:"API_KEY"`
+	APIBase string `json:"api_base" env:"API_BASE"`
 }
 
 type GatewayConfig struct {
