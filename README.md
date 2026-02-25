@@ -16,7 +16,6 @@
 
 </div>
 
-
 ---
 
 🦐 PicoClaw is an ultra-lightweight personal AI Assistant inspired by [nanobot](https://github.com/HKUDS/nanobot), refactored from the ground up in Go through a self-bootstrapping process, where the AI agent itself drove the entire architectural migration and code optimization.
@@ -39,6 +38,7 @@
 </table>
 
 ## 📢 News
+
 2026-02-09 🎉 PicoClaw Launched! Built in 1 day to bring AI Agents to $10 hardware with <10MB RAM. 🦐 皮皮虾，我们走！
 
 ## ✨ Features
@@ -53,17 +53,19 @@
 
 🤖 **AI-Bootstrapped**: Autonomous Go-native implementation — 95% Agent-generated core with human-in-the-loop refinement.
 
-|  | OpenClaw  | NanoBot | **PicoClaw** |
-| --- | --- | --- |--- |
-| **Language** | TypeScript | Python | **Go** |
-| **RAM** | >1GB |>100MB| **< 10MB** |
-| **Startup**</br>(0.8GHz core) | >500s | >30s |  **<1s** |
-| **Cost** | Mac Mini 599$ | Most Linux SBC </br>~50$ |**Any Linux Board**</br>**As low as 10$** |
+|                               | OpenClaw      | NanoBot                  | **PicoClaw**                              |
+| ----------------------------- | ------------- | ------------------------ | ----------------------------------------- |
+| **Language**                  | TypeScript    | Python                   | **Go**                                    |
+| **RAM**                       | >1GB          | >100MB                   | **< 10MB**                                |
+| **Startup**</br>(0.8GHz core) | >500s         | >30s                     | **<1s**                                   |
+| **Cost**                      | Mac Mini 599$ | Most Linux SBC </br>~50$ | **Any Linux Board**</br>**As low as 10$** |
+
 <img src="assets/compare.jpg" alt="PicoClaw" width="512">
 
-
 ## 🦾 Demonstration
+
 ### 🛠️ Standard Assistant Workflows
+
 <table align="center">
   <tr align="center">
     <th><p align="center">🧩 Full-Stack Engineer</p></th>
@@ -83,9 +85,10 @@
 </table>
 
 ### 🐜 Innovative Low-Footprint Deploy
+
 PicoClaw can be deployed on almost any Linux device!
 
-- $9.9 [LicheeRV-Nano](https://www.aliexpress.com/item/1005006519668532.html)  E(Ethernet) or W(WiFi6) version, for Minimal Home Assitant
+- $9.9 [LicheeRV-Nano](https://www.aliexpress.com/item/1005006519668532.html) E(Ethernet) or W(WiFi6) version, for Minimal Home Assitant
 - $30~50 [NanoKVM](https://www.aliexpress.com/item/1005007369816019.html), or $100 [NanoKVM-Pro](https://www.aliexpress.com/item/1005010048471263.html) for Automated Server Maintenance
 - $50 [MaixCAM](https://www.aliexpress.com/item/1005008053333693.html) or $100 [MaixCAM2](https://www.kickstarter.com/projects/zepan/maixcam2-build-your-next-gen-4k-ai-camera) for Smart Monitoring
 
@@ -179,7 +182,7 @@ picoclaw onboard
   "agents": {
     "defaults": {
       "workspace": "~/.picoclaw/workspace",
-      "model": "glm-4.7",
+      "model": "openrouter/arcee-ai/trinity-large-preview:free",
       "max_tokens": 8192,
       "temperature": 0.7,
       "max_tool_iterations": 20
@@ -223,10 +226,10 @@ That's it! You have a working AI assistant in 2 minutes.
 
 Talk to your picoclaw through Telegram
 
-| Channel | Setup |
-|---------|-------|
-| **Telegram** | Easy (just a token) |
-| **Discord** | Easy (bot token + intents) |
+| Channel      | Setup                      |
+| ------------ | -------------------------- |
+| **Telegram** | Easy (just a token)        |
+| **Discord**  | Easy (bot token + intents) |
 
 <details>
 <summary><b>Telegram</b> (Recommended)</summary>
@@ -258,22 +261,25 @@ Talk to your picoclaw through Telegram
 ```bash
 picoclaw gateway
 ```
-</details>
 
+</details>
 
 <details>
 <summary><b>Discord</b></summary>
 
 **1. Create a bot**
+
 - Go to https://discord.com/developers/applications
 - Create an application → Bot → Add Bot
 - Copy the bot token
 
 **2. Enable intents**
+
 - In the Bot settings, enable **MESSAGE CONTENT INTENT**
 - (Optional) Enable **SERVER MEMBERS INTENT** if you plan to use allow lists based on member data
 
 **3. Get your User ID**
+
 - Discord Settings → Advanced → enable **Developer Mode**
 - Right-click your avatar → **Copy User ID**
 
@@ -292,6 +298,7 @@ picoclaw gateway
 ```
 
 **5. Invite the bot**
+
 - OAuth2 → URL Generator
 - Scopes: `bot`
 - Bot Permissions: `Send Messages`, `Read Message History`
@@ -342,6 +349,7 @@ PicoClaw uses `config.json` for configuration.
 ```bash
 picoclaw agent -m "Hello"
 ```
+
 </details>
 
 <details>
@@ -399,22 +407,21 @@ picoclaw agent -m "Hello"
 
 ## CLI Reference
 
-| Command | Description |
-|---------|-------------|
-| `picoclaw onboard` | Initialize config & workspace |
-| `picoclaw agent -m "..."` | Chat with the agent |
-| `picoclaw agent` | Interactive chat mode |
-| `picoclaw gateway` | Start the gateway |
-| `picoclaw status` | Show status |
+| Command                   | Description                   |
+| ------------------------- | ----------------------------- |
+| `picoclaw onboard`        | Initialize config & workspace |
+| `picoclaw agent -m "..."` | Chat with the agent           |
+| `picoclaw agent`          | Interactive chat mode         |
+| `picoclaw gateway`        | Start the gateway             |
+| `picoclaw status`         | Show status                   |
 
 ## 🤝 Contribute & Roadmap
 
 PRs welcome! The codebase is intentionally small and readable. 🤗
 
-discord:  https://discord.gg/V4sAZ9XWpN
+discord: https://discord.gg/V4sAZ9XWpN
 
 <img src="assets/wechat.png" alt="PicoClaw" width="512">
-
 
 ## 🐛 Troubleshooting
 
@@ -423,6 +430,7 @@ discord:  https://discord.gg/V4sAZ9XWpN
 This is normal if you haven't configured a search API key yet. PicoClaw will provide helpful links for manual searching.
 
 To enable web search:
+
 1. Get a free API key at [https://brave.com/search/api](https://brave.com/search/api) (2000 free queries/month)
 2. Add to `~/.picoclaw/config.json`:
    ```json
@@ -450,9 +458,9 @@ This happens when another instance of the bot is running. Make sure only one `pi
 
 ## 📝 API Key Comparison
 
-| Service | Free Tier | Use Case |
-|---------|-----------|-----------|
-| **OpenRouter** | 200K tokens/month | Multiple models (Claude, GPT-4, etc.) |
-| **Zhipu** | 200K tokens/month | Best for Chinese users |
-| **Brave Search** | 2000 queries/month | Web search functionality |
-| **Groq** | Free tier available | Fast inference (Llama, Mixtral) |
+| Service          | Free Tier           | Use Case                              |
+| ---------------- | ------------------- | ------------------------------------- |
+| **OpenRouter**   | 200K tokens/month   | Multiple models (Claude, GPT-4, etc.) |
+| **Zhipu**        | 200K tokens/month   | Best for Chinese users                |
+| **Brave Search** | 2000 queries/month  | Web search functionality              |
+| **Groq**         | Free tier available | Fast inference (Llama, Mixtral)       |
