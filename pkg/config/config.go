@@ -110,7 +110,7 @@ func DefaultConfig() *Config {
 		Agents: AgentsConfig{
 			Defaults: AgentDefaults{
 				Workspace:         "~/.picoclaw/workspace",
-				Model:             "glm-4.7",
+				Model:             "openrouter/arcee-ai/trinity-large-preview:free",
 				MaxTokens:         8192,
 				Temperature:       0.7,
 				MaxToolIterations: 20,
