@@ -22,15 +22,20 @@ FROM alpine:3.21
 
 RUN apk add --no-cache ca-certificates tzdata
 
+WORKDIR /app
+
 # Copy binary
 COPY --from=builder /src/build/picoclaw /usr/local/bin/picoclaw
 
+# Copy config directory (to allow fallbacks)
+COPY --from=builder /src/config /app/config
+
 # Copy builtin skills
-COPY --from=builder /src/skills /opt/picoclaw/skills
+COPY --from=builder /src/skills /app/skills
 
 # Create picoclaw home directory
 RUN mkdir -p /root/.picoclaw/workspace/skills && \
-    cp -r /opt/picoclaw/skills/* /root/.picoclaw/workspace/skills/ 2>/dev/null || true
+    cp -r /app/skills/* /root/.picoclaw/workspace/skills/ 2>/dev/null || true
 
 ENTRYPOINT ["picoclaw"]
 CMD ["gateway"]
