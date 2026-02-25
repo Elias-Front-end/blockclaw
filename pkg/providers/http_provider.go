@@ -235,12 +235,14 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 		} else if envKey := os.Getenv("OPENROUTER_API_KEY"); envKey != "" {
 			apiKey = envKey
 			apiBase = "https://openrouter.ai/api/v1"
-		var envKeys []string
-		for _, env := range os.Environ() {
-			key := strings.Split(env, "=")[0]
-			envKeys = append(envKeys, key)
+		} else {
+			var envKeys []string
+			for _, env := range os.Environ() {
+				key := strings.Split(env, "=")[0]
+				envKeys = append(envKeys, key)
+			}
+			return nil, fmt.Errorf("no API key configured for model: %s. Use OPENROUTER_API_KEY env var. Found keys: %v", model, envKeys)
 		}
-		return nil, fmt.Errorf("no API key configured for model: %s. Use OPENROUTER_API_KEY env var. Found keys: %v", model, envKeys)
 	}
 
 	if apiKey == "" {
