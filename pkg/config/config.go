@@ -83,7 +83,7 @@ type ProvidersConfig struct {
 }
 
 type ProviderConfig struct {
-	APIKey  string `json:"api_key" env:"API_KEY"`
+	APIKey  string `json:"api_key" env:"API_KEY,GATEWAY_TOKEN"`
 	APIBase string `json:"api_base" env:"API_BASE"`
 }
 

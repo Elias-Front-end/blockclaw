@@ -178,6 +178,9 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 		apiKey = cfg.Providers.OpenRouter.APIKey
 		if apiKey == "" {
 			apiKey = os.Getenv("OPENROUTER_API_KEY")
+			if apiKey == "" {
+				apiKey = os.Getenv("OPENCLAW_GATEWAY_TOKEN")
+			}
 		}
 		if cfg.Providers.OpenRouter.APIBase != "" {
 			apiBase = cfg.Providers.OpenRouter.APIBase
@@ -235,18 +238,24 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 		} else if envKey := os.Getenv("OPENROUTER_API_KEY"); envKey != "" {
 			apiKey = envKey
 			apiBase = "https://openrouter.ai/api/v1"
+		} else if envKey := os.Getenv("OPENCLAW_GATEWAY_TOKEN"); envKey != "" {
+			apiKey = envKey
+			apiBase = "https://openrouter.ai/api/v1"
 		} else {
 			var envKeys []string
 			for _, env := range os.Environ() {
 				key := strings.Split(env, "=")[0]
 				envKeys = append(envKeys, key)
 			}
-			return nil, fmt.Errorf("no API key configured for model: %s. Use OPENROUTER_API_KEY env var. Found keys: %v", model, envKeys)
+			return nil, fmt.Errorf("no API key configured for model: %s. Use OPENROUTER_API_KEY or OPENCLAW_GATEWAY_TOKEN env var. Found keys: %v", model, envKeys)
 		}
 	}
 
 	if apiKey == "" {
 		apiKey = os.Getenv("OPENROUTER_API_KEY")
+		if apiKey == "" {
+			apiKey = os.Getenv("OPENCLAW_GATEWAY_TOKEN")
+		}
 	}
 
 	if apiKey == "" && !strings.HasPrefix(model, "bedrock/") {
@@ -255,7 +264,7 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 			key := strings.Split(env, "=")[0]
 			envKeys = append(envKeys, key)
 		}
-		return nil, fmt.Errorf("no API key configured for provider (model: %s). Please set OPENROUTER_API_KEY env var. Found keys: %v", model, envKeys)
+		return nil, fmt.Errorf("no API key configured for provider (model: %s). Please set OPENROUTER_API_KEY or OPENCLAW_GATEWAY_TOKEN env var. Found keys: %v", model, envKeys)
 	}
 
 	if apiBase == "" {
