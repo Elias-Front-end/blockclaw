@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 
 	"github.com/caarlos0/env/v11"
@@ -188,6 +189,33 @@ func LoadConfig(path string) (*Config, error) {
 
 	if err := env.Parse(cfg); err != nil {
 		return nil, err
+	}
+
+	// Manual fallbacks for environment variables (ensures reliability in containers)
+	if token := os.Getenv("TELEGRAM_TOKEN"); token != "" {
+		cfg.Channels.Telegram.Token = token
+		cfg.Channels.Telegram.Enabled = true
+	} else if token := os.Getenv("TELEGRAM_BOT_TOKEN"); token != "" {
+		cfg.Channels.Telegram.Token = token
+		cfg.Channels.Telegram.Enabled = true
+	}
+
+	if model := os.Getenv("MODEL"); model != "" {
+		cfg.Agents.Defaults.Model = model
+	}
+
+	if apiKey := os.Getenv("OPENROUTER_API_KEY"); apiKey != "" {
+		cfg.Providers.OpenRouter.APIKey = apiKey
+	} else if apiKey := os.Getenv("OPENCLAW_GATEWAY_TOKEN"); apiKey != "" {
+		cfg.Providers.OpenRouter.APIKey = apiKey
+	}
+
+	if allowFrom := os.Getenv("TELEGRAM_ALLOW_FROM"); allowFrom != "" {
+		cfg.Channels.Telegram.AllowFrom = strings.Split(allowFrom, ",")
+	}
+
+	if gatewayHost := os.Getenv("GATEWAY_HOST"); gatewayHost != "" {
+		cfg.Gateway.Host = gatewayHost
 	}
 
 	return cfg, nil
