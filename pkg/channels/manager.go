@@ -9,6 +9,8 @@ package channels
 import (
 	"context"
 	"fmt"
+	"os"
+	"strings"
 	"sync"
 
 	"github.com/sipeed/picoclaw/pkg/bus"
@@ -44,6 +46,16 @@ func NewManager(cfg *config.Config, messageBus *bus.MessageBus) (*Manager, error
 
 func (m *Manager) initChannels() error {
 	logger.InfoC("channels", "Initializing channel manager")
+
+	// Debug environment keys
+	var envKeys []string
+	for _, env := range os.Environ() {
+		key := strings.Split(env, "=")[0]
+		envKeys = append(envKeys, key)
+	}
+	logger.InfoCF("channels", "Available environment keys", map[string]interface{}{
+		"keys": envKeys,
+	})
 
 	if m.config.Channels.Telegram.Enabled {
 		if m.config.Channels.Telegram.Token != "" {
