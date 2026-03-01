@@ -46,7 +46,7 @@ type WhatsAppConfig struct {
 
 type TelegramConfig struct {
 	Enabled   bool     `json:"enabled" env:"PICOCLAW_CHANNELS_TELEGRAM_ENABLED"`
-	Token     string   `json:"token" env:"PICOCLAW_CHANNELS_TELEGRAM_TOKEN"`
+	Token     string   `json:"token" env:"TELEGRAM_BOT_TOKEN,PICOCLAW_CHANNELS_TELEGRAM_TOKEN"`
 	AllowFrom []string `json:"allow_from" env:"PICOCLAW_CHANNELS_TELEGRAM_ALLOW_FROM"`
 }
 
@@ -110,7 +110,7 @@ func DefaultConfig() *Config {
 		Agents: AgentsConfig{
 			Defaults: AgentDefaults{
 				Workspace:         "~/.picoclaw/workspace",
-				Model:             "openrouter/arcee-ai/trinity-large-preview:free",
+				Model:             "openrouter/nousresearch/hermes-3-llama-3.1-405b:free",
 				MaxTokens:         8192,
 				Temperature:       0.7,
 				MaxToolIterations: 20,
@@ -123,7 +123,7 @@ func DefaultConfig() *Config {
 				AllowFrom: []string{},
 			},
 			Telegram: TelegramConfig{
-				Enabled:   false,
+				Enabled:   true,
 				Token:     "",
 				AllowFrom: []string{},
 			},
