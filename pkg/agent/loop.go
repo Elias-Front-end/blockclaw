@@ -17,6 +17,7 @@ import (
 
 	"github.com/sipeed/picoclaw/pkg/bus"
 	"github.com/sipeed/picoclaw/pkg/config"
+	"github.com/sipeed/picoclaw/pkg/logger"
 	"github.com/sipeed/picoclaw/pkg/providers"
 	"github.com/sipeed/picoclaw/pkg/session"
 	"github.com/sipeed/picoclaw/pkg/tools"
@@ -80,17 +81,32 @@ func (al *AgentLoop) Run(ctx context.Context) error {
 				continue
 			}
 
+			logger.InfoCF("agent", "Processing message", map[string]interface{}{
+				"sender":  msg.SenderID,
+				"channel": msg.Channel,
+				"content": msg.Content,
+			})
+
 			response, err := al.processMessage(ctx, msg)
 			if err != nil {
+				logger.ErrorCF("agent", "Error processing message", map[string]interface{}{
+					"error": err.Error(),
+				})
 				response = fmt.Sprintf("Error processing message: %v", err)
 			}
 
 			if response != "" {
+				logger.InfoCF("agent", "Sending response", map[string]interface{}{
+					"chat_id": msg.ChatID,
+					"length":  len(response),
+				})
 				al.bus.PublishOutbound(bus.OutboundMessage{
 					Channel: msg.Channel,
 					ChatID:  msg.ChatID,
 					Content: response,
 				})
+			} else {
+				logger.WarnC("agent", "Empty response from agent")
 			}
 		}
 	}
@@ -145,13 +161,23 @@ func (al *AgentLoop) processMessage(ctx context.Context, msg bus.InboundMessage)
 		}
 
 		response, err := al.provider.Chat(ctx, messages, providerToolDefs, al.model, map[string]interface{}{
-			"max_tokens":  8192,
-			"temperature": 0.7,
-		})
+		"max_tokens":  8192,
+		"temperature": 0.7,
+	})
 
-		if err != nil {
-			return "", fmt.Errorf("LLM call failed: %w", err)
-		}
+	if err != nil {
+		logger.ErrorCF("agent", "LLM call failed", map[string]interface{}{
+			"model": al.model,
+			"error": err.Error(),
+		})
+		return "", fmt.Errorf("LLM call failed: %w", err)
+	}
+
+	logger.InfoCF("agent", "LLM response received", map[string]interface{}{
+		"model":       al.model,
+		"tool_calls":  len(response.ToolCalls),
+		"content_len": len(response.Content),
+	})
 
 		if len(response.ToolCalls) == 0 {
 			finalContent = response.Content
