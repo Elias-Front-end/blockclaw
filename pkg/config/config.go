@@ -10,8 +10,8 @@ import (
 )
 
 type Config struct {
-	Agents    AgentsConfig    `json:"agents"`
-	Channels  ChannelsConfig  `json:"channels"`
+	Agents    AgentsConfig    `json:"agents" envPrefix:""`
+	Channels  ChannelsConfig  `json:"channels" envPrefix:""`
 	Providers ProvidersConfig `json:"providers" envPrefix:""`
 	Gateway   GatewayConfig   `json:"gateway"`
 	Tools     ToolsConfig     `json:"tools"`
@@ -45,7 +45,7 @@ type WhatsAppConfig struct {
 }
 
 type TelegramConfig struct {
-	Enabled   bool     `json:"enabled" env:"PICOCLAW_CHANNELS_TELEGRAM_ENABLED"`
+	Enabled   bool     `json:"enabled" env:"TELEGRAM_ENABLED,PICOCLAW_CHANNELS_TELEGRAM_ENABLED"`
 	Token     string   `json:"token" env:"TELEGRAM_BOT_TOKEN,PICOCLAW_CHANNELS_TELEGRAM_TOKEN"`
 	AllowFrom []string `json:"allow_from" env:"PICOCLAW_CHANNELS_TELEGRAM_ALLOW_FROM"`
 }
