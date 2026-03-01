@@ -13,7 +13,7 @@ RUN go mod download
 
 # Copy source and build
 COPY . .
-RUN make build
+RUN mkdir -p config build && make build
 
 # ============================================================
 # Stage 2: Minimal runtime image
