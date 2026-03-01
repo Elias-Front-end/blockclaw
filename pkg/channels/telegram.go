@@ -12,6 +12,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+    "strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
@@ -389,9 +390,18 @@ func (c *TelegramChannel) downloadFile(fileID, ext string) string {
 }
 
 func parseChatID(chatIDStr string) (int64, error) {
-	var id int64
-	_, err := fmt.Sscanf(chatIDStr, "%d", &id)
-	return id, err
+    // Use a robust parser that handles a wide range of integer formats
+    id, err := strconv.ParseInt(chatIDStr, 10, 64)
+    if err != nil {
+        // Fallback to the previous approach for compatibility, if needed
+        var fallback int64
+        _, ferr := fmt.Sscanf(chatIDStr, "%d", &fallback)
+        if ferr != nil {
+            return 0, err
+        }
+        return fallback, nil
+    }
+    return id, nil
 }
 
 func truncateString(s string, maxLen int) string {
