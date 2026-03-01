@@ -12,64 +12,64 @@ import (
 type Config struct {
 	Agents    AgentsConfig    `json:"agents"`
 	Channels  ChannelsConfig  `json:"channels"`
-	Providers ProvidersConfig `json:"providers" envPrefix:""`
+	Providers ProvidersConfig `json:"providers"`
 	Gateway   GatewayConfig   `json:"gateway"`
 	Tools     ToolsConfig     `json:"tools"`
 	mu        sync.RWMutex
 }
 
 type AgentsConfig struct {
-	Defaults AgentDefaults `json:"defaults" envPrefix:""`
+	Defaults AgentDefaults `json:"defaults"`
 }
 
 type AgentDefaults struct {
-	Workspace         string  `json:"workspace" env:"PICOCLAW_AGENTS_DEFAULTS_WORKSPACE"`
-	Model             string  `json:"model" env:"MODEL,PICOCLAW_AGENTS_DEFAULTS_MODEL"`
-	MaxTokens         int     `json:"max_tokens" env:"PICOCLAW_AGENTS_DEFAULTS_MAX_TOKENS"`
-	Temperature       float64 `json:"temperature" env:"PICOCLAW_AGENTS_DEFAULTS_TEMPERATURE"`
-	MaxToolIterations int     `json:"max_tool_iterations" env:"PICOCLAW_AGENTS_DEFAULTS_MAX_TOOL_ITERATIONS"`
+	Workspace         string  `json:"workspace" env:"WORKSPACE"`
+	Model             string  `json:"model" env:"MODEL"`
+	MaxTokens         int     `json:"max_tokens" env:"MAX_TOKENS"`
+	Temperature       float64 `json:"temperature" env:"TEMPERATURE"`
+	MaxToolIterations int     `json:"max_tool_iterations" env:"MAX_TOOL_ITERATIONS"`
 }
 
 type ChannelsConfig struct {
-	WhatsApp WhatsAppConfig `json:"whatsapp" envPrefix:""`
-	Telegram TelegramConfig `json:"telegram" envPrefix:""`
-	Feishu   FeishuConfig   `json:"feishu" envPrefix:""`
-	Discord  DiscordConfig  `json:"discord" envPrefix:""`
-	MaixCam  MaixCamConfig  `json:"maixcam" envPrefix:""`
+	WhatsApp WhatsAppConfig `json:"whatsapp"`
+	Telegram TelegramConfig `json:"telegram"`
+	Feishu   FeishuConfig   `json:"feishu"`
+	Discord  DiscordConfig  `json:"discord"`
+	MaixCam  MaixCamConfig  `json:"maixcam"`
 }
 
 type WhatsAppConfig struct {
-	Enabled   bool     `json:"enabled" env:"WHATSAPP_ENABLED,PICOCLAW_CHANNELS_WHATSAPP_ENABLED"`
-	BridgeURL string   `json:"bridge_url" env:"WHATSAPP_BRIDGE_URL,PICOCLAW_CHANNELS_WHATSAPP_BRIDGE_URL"`
-	AllowFrom []string `json:"allow_from" env:"PICOCLAW_CHANNELS_WHATSAPP_ALLOW_FROM"`
+	Enabled   bool     `json:"enabled" env:"WHATSAPP_ENABLED"`
+	BridgeURL string   `json:"bridge_url" env:"WHATSAPP_BRIDGE_URL"`
+	AllowFrom []string `json:"allow_from" env:"WHATSAPP_ALLOW_FROM"`
 }
 
 type TelegramConfig struct {
-	Enabled   bool     `json:"enabled" env:"TELEGRAM_ENABLED,PICOCLAW_CHANNELS_TELEGRAM_ENABLED"`
-	Token     string   `json:"token" env:"TELEGRAM_TOKEN,TELEGRAM_BOT_TOKEN,PICOCLAW_CHANNELS_TELEGRAM_TOKEN"`
-	AllowFrom []string `json:"allow_from" env:"PICOCLAW_CHANNELS_TELEGRAM_ALLOW_FROM"`
+	Enabled   bool     `json:"enabled" env:"TELEGRAM_ENABLED"`
+	Token     string   `json:"token" env:"TELEGRAM_TOKEN"`
+	AllowFrom []string `json:"allow_from" env:"TELEGRAM_ALLOW_FROM"`
 }
 
 type FeishuConfig struct {
-	Enabled           bool     `json:"enabled" env:"PICOCLAW_CHANNELS_FEISHU_ENABLED"`
-	AppID             string   `json:"app_id" env:"PICOCLAW_CHANNELS_FEISHU_APP_ID"`
-	AppSecret         string   `json:"app_secret" env:"PICOCLAW_CHANNELS_FEISHU_APP_SECRET"`
-	EncryptKey        string   `json:"encrypt_key" env:"PICOCLAW_CHANNELS_FEISHU_ENCRYPT_KEY"`
-	VerificationToken string   `json:"verification_token" env:"PICOCLAW_CHANNELS_FEISHU_VERIFICATION_TOKEN"`
-	AllowFrom         []string `json:"allow_from" env:"PICOCLAW_CHANNELS_FEISHU_ALLOW_FROM"`
+	Enabled           bool     `json:"enabled" env:"FEISHU_ENABLED"`
+	AppID             string   `json:"app_id" env:"FEISHU_APP_ID"`
+	AppSecret         string   `json:"app_secret" env:"FEISHU_APP_SECRET"`
+	EncryptKey        string   `json:"encrypt_key" env:"FEISHU_ENCRYPT_KEY"`
+	VerificationToken string   `json:"verification_token" env:"FEISHU_VERIFICATION_TOKEN"`
+	AllowFrom         []string `json:"allow_from" env:"FEISHU_ALLOW_FROM"`
 }
 
 type DiscordConfig struct {
-	Enabled   bool     `json:"enabled" env:"DISCORD_ENABLED,PICOCLAW_CHANNELS_DISCORD_ENABLED"`
-	Token     string   `json:"token" env:"DISCORD_TOKEN,DISCORD_BOT_TOKEN,PICOCLAW_CHANNELS_DISCORD_TOKEN"`
-	AllowFrom []string `json:"allow_from" env:"PICOCLAW_CHANNELS_DISCORD_ALLOW_FROM"`
+	Enabled   bool     `json:"enabled" env:"DISCORD_ENABLED"`
+	Token     string   `json:"token" env:"DISCORD_TOKEN"`
+	AllowFrom []string `json:"allow_from" env:"DISCORD_ALLOW_FROM"`
 }
 
 type MaixCamConfig struct {
-	Enabled   bool     `json:"enabled" env:"PICOCLAW_CHANNELS_MAIXCAM_ENABLED"`
-	Host      string   `json:"host" env:"PICOCLAW_CHANNELS_MAIXCAM_HOST"`
-	Port      int      `json:"port" env:"PICOCLAW_CHANNELS_MAIXCAM_PORT"`
-	AllowFrom []string `json:"allow_from" env:"PICOCLAW_CHANNELS_MAIXCAM_ALLOW_FROM"`
+	Enabled   bool     `json:"enabled" env:"MAIXCAM_ENABLED"`
+	Host      string   `json:"host" env:"MAIXCAM_HOST"`
+	Port      int      `json:"port" env:"MAIXCAM_PORT"`
+	AllowFrom []string `json:"allow_from" env:"MAIXCAM_ALLOW_FROM"`
 }
 
 type ProvidersConfig struct {
@@ -83,7 +83,7 @@ type ProvidersConfig struct {
 }
 
 type ProviderConfig struct {
-	APIKey  string `json:"api_key" env:"API_KEY,GATEWAY_TOKEN"`
+	APIKey  string `json:"api_key" env:"API_KEY"`
 	APIBase string `json:"api_base" env:"API_BASE"`
 }
 

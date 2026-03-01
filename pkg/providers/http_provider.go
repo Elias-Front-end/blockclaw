@@ -180,6 +180,9 @@ func CreateProvider(cfg *config.Config) (LLMProvider, error) {
 			apiKey = os.Getenv("OPENROUTER_API_KEY")
 			if apiKey == "" {
 				apiKey = os.Getenv("OPENCLAW_GATEWAY_TOKEN")
+				if apiKey == "" {
+					apiKey = os.Getenv("API_KEY")
+				}
 			}
 		}
 		if cfg.Providers.OpenRouter.APIBase != "" {
