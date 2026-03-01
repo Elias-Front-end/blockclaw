@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PicoClaw Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="cc-chat" aria-label="Chat com PicoClaw">
+    <div class="cc-header">
+      <div class="cc-title">PicoClaw Chat</div>
+    </div>
+    <div id="cc-messages" class="cc-messages" aria-live="polite"></div>
+    <form id="cc-form" class="cc-form" autocomplete="off">
+      <input id="cc-input" class="cc-input" type="text" placeholder="Digite sua mensagem..." />
+      <button type="submit" class="cc-send">Enviar</button>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

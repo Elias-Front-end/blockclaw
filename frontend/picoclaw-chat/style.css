@@ -1,0 +1,107 @@
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7f7;
+  --border: #e5e5e5;
+  --user: #d0e8ff;
+  --pico: #f2f2f2;
+  --accent: #4a7bd3;
+}
+
+html, body {
+  height: 100%;
+  background: #f0f2f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #111;
+  margin: 0;
+}
+
+.cc-chat {
+  width: 100%;
+  max-width: 800px;
+  height: 70vh;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+}
+
+.cc-header {
+  padding: 12px 16px;
+  background: #f8f8f8;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+.cc-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.cc-messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: linear-gradient(#fff, #fbfcff);
+}
+
+.message {
+  max-width: 72%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+}
+.message.user {
+  align-self: flex-end;
+  background: var(--user);
+  border: 1px solid #9ed2ff;
+}
+.message.pico {
+  align-self: flex-start;
+  background: var(--pico);
+  border: 1px solid #e3e3e3;
+}
+.message .author {
+  display: block;
+  font-size: 11px;
+  color: #555;
+  margin-bottom: 4px;
+}
+.message.user .author { color: #0a4e85; }
+
+.cc-form {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+.cc-input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.cc-send {
+  margin-left: 8px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cc-send:hover { filter: brightness(0.95); }
+
+@media (max-width: 640px) {
+  .cc-chat { height: 80vh; margin: 12px; }
+  .message { max-width: 100%; }
+}
