@@ -1,1 +1,0 @@
-# PicoClaw Chat (Frontend)
