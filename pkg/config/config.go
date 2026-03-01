@@ -37,16 +37,6 @@ type ChannelsConfig struct {
 	Feishu   FeishuConfig   `json:"feishu"`
 	Discord  DiscordConfig  `json:"discord"`
 	MaixCam  MaixCamConfig  `json:"maixcam"`
-	Webhook  WebhookConfig  `json:"webhook"`
-}
-
-type WebhookConfig struct {
-	Enabled     bool     `json:"enabled" env:"WEBHOOK_ENABLED"`
-	Port        int      `json:"port" env:"WEBHOOK_PORT"`
-	Path        string   `json:"path" env:"WEBHOOK_PATH"`
-	SecretToken string   `json:"secret_token" env:"WEBHOOK_SECRET_TOKEN"`
-	CallbackURL string   `json:"callback_url" env:"WEBHOOK_CALLBACK_URL"`
-	AllowFrom   []string `json:"allow_from" env:"WEBHOOK_ALLOW_FROM"`
 }
 
 type WhatsAppConfig struct {
