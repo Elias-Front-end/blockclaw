@@ -176,14 +176,11 @@ func LoadConfig(path string) (*Config, error) {
 	cfg := DefaultConfig()
 
 	data, err := os.ReadFile(path)
-	if err != nil {
-		if os.IsNotExist(err) {
-			return cfg, nil
+	if err == nil {
+		if err := json.Unmarshal(data, cfg); err != nil {
+			return nil, err
 		}
-		return nil, err
-	}
-
-	if err := json.Unmarshal(data, cfg); err != nil {
+	} else if !os.IsNotExist(err) {
 		return nil, err
 	}
 
